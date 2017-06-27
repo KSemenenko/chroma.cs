@@ -109,4 +109,58 @@ namespace ChromaCs
         public double H { get; set; }
         public int Alpha { get; set; }
     }
+
+    public class HslColor
+    {
+        public HslColor() { }
+
+        public HslColor(double h, double s, double l, int alpha = 1) //TODO: Check alpha
+        {
+            H = h;
+            S = s;
+            L = l;
+            Alpha = alpha;
+        }
+
+        public double H { get; set; }
+        public double S { get; set; }
+        public double L { get; set; }
+        public int Alpha { get; set; }
+    }
+
+    public class HsvColor
+    {
+        public HsvColor() { }
+
+        public HsvColor(double h, double s, double v, int alpha = 1) //TODO: Check alpha
+        {
+            H = h;
+            S = s;
+            V = v;
+            Alpha = alpha;
+        }
+
+        public double H { get; set; }
+        public double S { get; set; }
+        public double V { get; set; }
+        public int Alpha { get; set; }
+    }
+
+    public class HsiColor
+    {
+        public HsiColor() { }
+
+        public HsiColor(double h, double s, double i, int alpha = 1) //TODO: Check alpha
+        {
+            H = h;
+            S = s;
+            I = i;
+            Alpha = alpha;
+        }
+
+        public double H { get; set; }
+        public double S { get; set; }
+        public double I { get; set; }
+        public int Alpha { get; set; }
+    }
 }

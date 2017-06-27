@@ -6,6 +6,11 @@ namespace ChromaCs
 {
     public class W3cX11
     {
+//         private Dictionary<string, string> colors = new Dictionary<string, string>
+//         {
+// [           ["Aliceblue"] = "#f0f8ff",
+//         };
+
         public string Aliceblue = "#f0f8ff";
         public string Antiquewhite = "#faebd7";
         public string Aqua = "#00ffff";
@@ -162,5 +167,7 @@ namespace ChromaCs
         public string Yellow = "#ffff00";
         public string Yellowgreen = "#9acd32";
 
+        public Dictionary<string, string> Colors { get => Colors1; set => Colors1 = value; }
+        public Dictionary<string, string> Colors1 { get => colors; set => colors = value; }
     }
 }
