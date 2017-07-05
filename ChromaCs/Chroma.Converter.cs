@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -7,6 +8,8 @@ namespace ChromaCs
 {
     public partial class Chroma
     {
+        //In
+
         public RgbColor CmykToRgb(CmykColor color)
         {
             int alpha, b, c, g, k, m, r, y;
@@ -33,54 +36,53 @@ namespace ChromaCs
 
         public RgbColor CssToRgb(string css)
         {
-   
+
             int hsl, i, j, k, l, m, n, rgb;
             css = css.ToLowerInvariant();
+
+
             // if ((chroma.colors != null) && chroma.colors[css])
             // {
             //    return Hex2Rgb(chroma.colors[css]);
             // }
-            if (m = css.match(/ rgb\(\s * (\-?\d +),\s * (\-?\d +)\s *,\s * (\-?\d +)\s *\)/)) {
-               rgb = m.slice(1, 4);
-               for (i = j = 0; j <= 2; i = ++j)
-               {
-                   rgb[i] = +rgb[i];
-               }
-               rgb[3] = 1;
-            } else if (m = css.match(/ rgba\(\s * (\-?\d +),\s * (\-?\d +)\s *,\s * (\-?\d +)\s *,\s * ([01] |[01] ?\.\d +)\)/)) {
-               rgb = m.slice(1, 5);
-               for (i = k = 0; k <= 3; i = ++k)
-               {
-                   rgb[i] = +rgb[i];
-               }
-            } else if (m = css.match(/ rgb\(\s * (\-?\d + (?:\.\d +) ?)%,\s * (\-?\d + (?:\.\d +)?)%\s *,\s * (\-?\d + (?:\.\d +)?)%\s *\)/)) {
-               rgb = m.slice(1, 4);
-               for (i = l = 0; l <= 2; i = ++l)
-               {
-                   rgb[i] = round(rgb[i] * 2.55);
-               }
-               rgb[3] = 1;
-            } else if (m = css.match(/ rgba\(\s * (\-?\d + (?:\.\d +) ?)%,\s * (\-?\d + (?:\.\d +)?)%\s *,\s * (\-?\d + (?:\.\d +)?)%\s *,\s * ([01] |[01] ?\.\d +)\)/)) {
-               rgb = m.slice(1, 5);
-               for (i = n = 0; n <= 2; i = ++n)
-               {
-                   rgb[i] = round(rgb[i] * 2.55);
-               }
-               rgb[3] = +rgb[3];
-            } else if (m = css.match(/ hsl\(\s * (\-?\d + (?:\.\d +) ?),\s * (\-?\d + (?:\.\d +)?)%\s *,\s * (\-?\d + (?:\.\d +)?)%\s *\)/)) {
-               hsl = m.slice(1, 4);
-               hsl[1] *= 0.01;
-               hsl[2] *= 0.01;
-               rgb = hsl2rgb(hsl);
-               rgb[3] = 1;
-            } else if (m = css.match(/ hsla\(\s * (\-?\d + (?:\.\d +) ?),\s * (\-?\d + (?:\.\d +)?)%\s *,\s * (\-?\d + (?:\.\d +)?)%\s *,\s * ([01] |[01] ?\.\d +)\)/)) {
-               hsl = m.slice(1, 4);
-               hsl[1] *= 0.01;
-               hsl[2] *= 0.01;
-               rgb = hsl2rgb(hsl);
-               rgb[3] = +m[4];
-            }
-            return rgb;
+
+            //if (m = Regex.Match(/rgb\(\s*(\-?\d+),\s*(\-?\d+)\s*,\s*(\-?\d+)\s*\)/)) {
+            //  rgb = m.slice(1, 4);
+            //  for (i = j = 0; j <= 2; i = ++j) {
+            //    rgb[i] = +rgb[i];
+            //  }
+            //  rgb[3] = 1;
+            //} else if (m = css.match(/rgba\(\s*(\-?\d+),\s*(\-?\d+)\s*,\s*(\-?\d+)\s*,\s*([01]|[01]?\.\d+)\)/)) {
+            //  rgb = m.slice(1, 5);
+            //  for (i = k = 0; k <= 3; i = ++k) {
+            //    rgb[i] = +rgb[i];
+            //  }
+            //} else if (m = css.match(/rgb\(\s*(\-?\d+(?:\.\d+)?)%,\s*(\-?\d+(?:\.\d+)?)%\s*,\s*(\-?\d+(?:\.\d+)?)%\s*\)/)) {
+            //  rgb = m.slice(1, 4);
+            //  for (i = l = 0; l <= 2; i = ++l) {
+            //    rgb[i] = round(rgb[i] * 2.55);
+            //  }
+            //  rgb[3] = 1;
+            //} else if (m = css.match(/rgba\(\s*(\-?\d+(?:\.\d+)?)%,\s*(\-?\d+(?:\.\d+)?)%\s*,\s*(\-?\d+(?:\.\d+)?)%\s*,\s*([01]|[01]?\.\d+)\)/)) {
+            //  rgb = m.slice(1, 5);
+            //  for (i = n = 0; n <= 2; i = ++n) {
+            //    rgb[i] = round(rgb[i] * 2.55);
+            //  }
+            //  rgb[3] = +rgb[3];
+            //} else if (m = css.match(/hsl\(\s*(\-?\d+(?:\.\d+)?),\s*(\-?\d+(?:\.\d+)?)%\s*,\s*(\-?\d+(?:\.\d+)?)%\s*\)/)) {
+            //  hsl = m.slice(1, 4);
+            //  hsl[1] *= 0.01;
+            //  hsl[2] *= 0.01;
+            //  rgb = hsl2rgb(hsl);
+            //  rgb[3] = 1;
+            //} else if (m = css.match(/hsla\(\s*(\-?\d+(?:\.\d+)?),\s*(\-?\d+(?:\.\d+)?)%\s*,\s*(\-?\d+(?:\.\d+)?)%\s*,\s*([01]|[01]?\.\d+)\)/)) {
+            //  hsl = m.slice(1, 4);
+            //  hsl[1] *= 0.01;
+            //  hsl[2] *= 0.01;
+            //  rgb = hsl2rgb(hsl);
+            //  rgb[3] = +m[4];
+            //}
+            return new RgbColor();
         }
 
         public RgbColor HcgToRgb(HcgColor color)
@@ -140,7 +142,6 @@ namespace ChromaCs
 
             return new RgbColor(r, g, b, color.Alpha);
         }
-
 
         public RgbColor Hex2Rgb(string hex)
         {
@@ -244,6 +245,7 @@ namespace ChromaCs
 
             return new RgbColor(Convert.ToInt32(r * 255), Convert.ToInt32(g * 255), Convert.ToInt32(b * 255), hsi.Alpha);
         }
+
         public RgbColor HslToRgb(HslColor hsl)
         {
             double b, g, h, l, r, s;
@@ -434,8 +436,329 @@ namespace ChromaCs
             return new RgbColor(Convert.ToInt32(r), Convert.ToInt32(g), Convert.ToInt32(b));
         }
 
+        //out
+
+        public string HslToCss(HslColor hsl)
+        {
+            Func<double, string> rnd = (a) =>
+            {
+                return (Math.Round(a * 100) / 100).ToString();
+            };
+
+            var mode = hsl.Alpha < 1 ? "hsla" : "hsl";
+
+            var h = rnd(hsl.H);
+            var s = rnd(hsl.S * 100) + '%';
+            var l = rnd(hsl.L * 100) + '%';
+            if (mode == "hsla")
+            {
+                return $"{mode}({h},{s},{l},{hsl.Alpha})";
+            }
+            return $"{mode}({h},{s},{l})";
+        }
+
+        public CmykColor RgbToCmyk(RgbColor rgb)
+        {
+            var r = rgb.R / 255;
+            var g = rgb.G / 255;
+            var b = rgb.B / 255;
+            var k = 1 - Math.Max(r, Math.Max(g, b));
+
+            var f = k < 1 ? 1 / (1 - k) : 0;
+            var c = (1 - r - k) * f;
+            var m = (1 - g - k) * f;
+            var y = (1 - b - k) * f;
+
+            return new CmykColor(c, m, y, k);
+        }
+
+        public string RgbToCss(RgbColor rgb)
+        {
+            var mode = rgb.A < 1 ? "rgba" : "rgb";
+            if (mode == "rgb")
+            {
+                return $"{mode}({rgb.R},{rgb.G},{rgb.B})";
+            }
+            else //if (mode == "rgba")
+            {
+                return $"{mode}({rgb.R},{rgb.G},{rgb.B},{rgb.A})";
+            }
+        }
+
+        public HcgColor RgbToHcg(RgbColor rgb)
+        {
+
+            var min = (new int[] { rgb.R, rgb.G, rgb.B }).Min();
+            var max = (new int[] { rgb.R, rgb.G, rgb.B }).Max();
+            var delta = max - min;
+            var c = delta * 100 / 255;
+            var _g = min / (255 - delta) * 100;
+            var h = 0;
 
 
+            if (delta == 0)
+            {
+                h = 0;
+            }
+            else
+            {
+                if (rgb.R == max)
+                {
+                    h = (rgb.G - rgb.B) / delta;
+                }
+                if (rgb.G == max)
+                {
+                    h = 2 + (rgb.B - rgb.R) / delta;
+                }
+                if (rgb.B == max)
+                {
+                    h = 4 + (rgb.R - rgb.G) / delta;
+                }
+                h *= 60;
+                if (h < 0)
+                {
+                    h += 360;
+                }
+            }
+
+            return new HcgColor(h, c, _g);
+        }
+
+        public string RgbToHex(RgbColor rgb)
+        {
+            var mode = rgb.A < 1 ? "rgba" : "rgb";
+
+            var u = rgb.R << 16 | rgb.G << 8 | rgb.B;
+            var str = "000000" + u.ToString("X4");
+            str = str.Substring(str.Length - 6);
+            var hxa = "0" + (rgb.A * 255).ToString("X4");
+            hxa = hxa.Substring(hxa.Length - 2);
+
+            switch (mode.ToLowerInvariant())
+            {
+                case "rgba":
+                    return "#" + str + hxa;
+                case "argb":
+                    return "#" + hxa + str;
+                default:
+                    return "#" + str;
+            }
+
+        }
+
+        public HsiColor RgbToHsi(RgbColor rgb)
+        {
+            var TWOPI = Math.PI * 2;
+            var r = rgb.R / 255;
+            var g = rgb.G / 255;
+            var b = rgb.B / 255;
+            var min = (new int[] { rgb.R, rgb.G, rgb.B }).Min();
+            var i = (r + g + b) / 3d;
+            var s = 1d - min / i;
+            double h;
+
+            if (s == 0d)
+            {
+                h = 0;
+            }
+            else
+            {
+                h = ((r - g) + (r - b)) / 2;
+                h /= Math.Sqrt((r - g) * (r - g) + (r - b) * (g - b));
+                h = Math.Acos(h);
+                if (b > g)
+                {
+                    h = TWOPI - h;
+                }
+                h /= TWOPI;
+            }
+            return new HsiColor(h * 360, s, i);
+        }
+
+        public HslColor RgbToHsl(RgbColor rgb)
+        {
+
+            var r = rgb.R / 255d;
+            var g = rgb.G / 255d;
+            var b = rgb.B / 255d;
+            var min = (new int[] { rgb.R, rgb.G, rgb.B }).Min();
+            var max = (new int[] { rgb.R, rgb.G, rgb.B }).Max();
+            var l = (max + min) / 2d;
+            var s = 0d;
+            var h = 0d;
+
+            if (max == min)
+            {
+                s = 0d;
+                h = double.NaN;
+            }
+            else
+            {
+                s = l < 0.5 ? (max - min) / (max + min) : (max - min) / (2 - max - min);
+            }
+            if (r == max)
+            {
+                h = (g - b) / (max - min);
+            }
+            else if (g == max)
+            {
+                h = 2 + (b - r) / (max - min);
+            }
+            else if (b == max)
+            {
+                h = 4 + (r - g) / (max - min);
+            }
+
+            h *= 60;
+
+            if (h < 0)
+            {
+                h += 360;
+            }
+
+            return new HslColor(h, s, l);
+        }
+
+        public HsvColor RgbToHsv(RgbColor rgb)
+        {
+            double b, delta, g, h, r, s, v;
+
+            var min = (new int[] { rgb.R, rgb.G, rgb.B }).Min();
+            var max = (new int[] { rgb.R, rgb.G, rgb.B }).Max();
+
+            h = 0;
+
+            delta = max - min;
+            v = max / 255.0;
+            if (max == 0)
+            {
+                h = double.NaN;
+                s = 0;
+            }
+            else
+            {
+                s = delta / max;
+                if (rgb.R == max)
+                {
+                    h = (rgb.G - rgb.B) / delta;
+                }
+                if (rgb.G == max)
+                {
+                    h = 2 + (rgb.B - rgb.R) / delta;
+                }
+                if (rgb.B == max)
+                {
+                    h = 4 + (rgb.R - rgb.G) / delta;
+                }
+
+                h *= 60d;
+
+                if (h < 0)
+                {
+                    h += 360;
+                }
+            }
+            return new HsvColor(h, s, v);
+        }
+
+        public LabColor RgbToLab(RgbColor rgb)
+        {
+            Func<double, double> rgb_xyz = (r) =>
+            {
+                if ((r /= 255) <= 0.04045)
+                {
+                    return r / 12.92;
+                }
+                else
+                {
+                    return Math.Pow((r + 0.055) / 1.055, 2.4);
+                }
+            };
+
+            Func<double, double> xyz_lab = (t) =>
+            {
+                if (t > LabColor.LabConstants.T3)
+                {
+                    return Math.Pow(t, 1 / 3);
+                }
+                else
+                {
+                    return t / LabColor.LabConstants.T2 + LabColor.LabConstants.T0;
+                }
+            };
+
+            Func<RgbColor, Tuple<double, double, double>> rgb2xyz = (rgbColor) =>
+            {
+                var r = rgb_xyz(rgbColor.R);
+                var g = rgb_xyz(rgbColor.G);
+                var b = rgb_xyz(rgbColor.B);
+                var lx = xyz_lab((0.4124564 * r + 0.3575761 * g + 0.1804375 * b) / LabColor.LabConstants.Xn);
+                var ly = xyz_lab((0.2126729 * r + 0.7151522 * g + 0.0721750 * b) / LabColor.LabConstants.Yn);
+                var lz = xyz_lab((0.0193339 * r + 0.1191920 * g + 0.9503041 * b) / LabColor.LabConstants.Zn);
+                return new Tuple<double, double, double>(lx, ly, lz);
+            };
+
+            var rez = rgb2xyz(rgb);
+            var x = rez.Item1;
+            var y = rez.Item2;
+            var z = rez.Item3;
+            return new LabColor(116 * y - 16, 500 * (x - y), 200 * (y - z));
+        }
+
+        public LchColor RgbToLch(RgbColor rgb)
+        {
+            var lab = RgbToLab(rgb);
+            return LabToLch(lab);
+        }
+
+        public double RgbToLuminance(RgbColor rgb)
+        {
+            Func<double, double> luminance_x = (x) =>
+             {
+                 x /= 255;
+                 if (x <= 0.03928)
+                 {
+                     return x / 12.92;
+                 }
+                 else
+                 {
+                     return Math.Pow((x + 0.055) / 1.055, 2.4);
+                 }
+             };
+
+            var r = luminance_x(rgb.R);
+            var g = luminance_x(rgb.G);
+            var b = luminance_x(rgb.B);
+            return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        }
+
+        public int RgbToNum(RgbColor rgb)
+        {
+            return (rgb.R << 16) + (rgb.G << 8) + rgb.B;
+        }
+
+        public double RgbToTemperature(RgbColor rgb)
+        {
+            double  eps,  maxTemp, minTemp, temp;
+            temp = 0;
+            minTemp = 1000;
+            maxTemp = 40000;
+            eps = 0.4;
+            while (maxTemp - minTemp > eps)
+            {
+                temp = (maxTemp + minTemp) * 0.5;
+                var localRgb = TemperatureToRgb(temp);
+                if ((localRgb.B / localRgb.R) >= (rgb.B / rgb.R))
+                {
+                    maxTemp = temp;
+                }
+                else
+                {
+                    minTemp = temp;
+                }
+            }
+            return Math.Round(temp);
+        }
 
         ///
         public LabColor LchToLab(LchColor lch)

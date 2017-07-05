@@ -167,7 +167,7 @@ namespace ChromaCs
         public string Yellow = "#ffff00";
         public string Yellowgreen = "#9acd32";
 
-        public Dictionary<string, string> Colors { get => Colors1; set => Colors1 = value; }
-        public Dictionary<string, string> Colors1 { get => colors; set => colors = value; }
+        //public Dictionary<string, string> Colors { get => Colors1; set => Colors1 = value; }
+        //public Dictionary<string, string> Colors1 { get => colors; set => colors = value; }
     }
 }
