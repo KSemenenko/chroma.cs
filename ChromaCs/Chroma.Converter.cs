@@ -10,7 +10,7 @@ namespace ChromaCs
     {
         //In
 
-        public RgbColor CmykToRgb(CmykColor color)
+        internal static Color CmykToRgb(CmykColor color)
         {
             int alpha, b, c, g, k, m, r, y;
             c = color.C;
@@ -23,18 +23,18 @@ namespace ChromaCs
 
             if (k == 1)
             {
-                return new RgbColor(0, 0, 0, alpha);
+                return new Color(0, 0, 0, alpha);
             }
 
             r = c >= 1 ? 0 : 255 * (1 - c) * (1 - k);
             g = m >= 1 ? 0 : 255 * (1 - m) * (1 - k);
             b = y >= 1 ? 0 : 255 * (1 - y) * (1 - k);
 
-            return new RgbColor(r, g, b, alpha);
+            return new Color(r, g, b, alpha);
 
         }
 
-        public RgbColor CssToRgb(string css)
+        internal static Color CssToRgb(string css)
         {
 
             int hsl, i, j, k, l, m, n, rgb;
@@ -82,10 +82,10 @@ namespace ChromaCs
             //  rgb = hsl2rgb(hsl);
             //  rgb[3] = +m[4];
             //}
-            return new RgbColor();
+            return new Color();
         }
 
-        public RgbColor HcgToRgb(HcgColor color)
+        internal static Color HcgToRgb(HcgColor color)
         {
             int _c, _g, b, c, f, g, h, i, p, q, r, t, v;
             r = 0;
@@ -126,24 +126,24 @@ namespace ChromaCs
                 switch (i)
                 {
                     case 0:
-                        return new RgbColor(v, t, p, color.Alpha);
+                        return new Color(v, t, p, color.Alpha);
                     case 1:
-                        return new RgbColor(q, v, p, color.Alpha);
+                        return new Color(q, v, p, color.Alpha);
                     case 2:
-                        return new RgbColor(p, v, t, color.Alpha);
+                        return new Color(p, v, t, color.Alpha);
                     case 3:
-                        return new RgbColor(p, q, v, color.Alpha);
+                        return new Color(p, q, v, color.Alpha);
                     case 4:
-                        return new RgbColor(t, p, v, color.Alpha);
+                        return new Color(t, p, v, color.Alpha);
                     case 5:
-                        return new RgbColor(v, p, q, color.Alpha);
+                        return new Color(v, p, q, color.Alpha);
                 }
             }
 
-            return new RgbColor(r, g, b, color.Alpha);
+            return new Color(r, g, b, color.Alpha);
         }
 
-        public RgbColor Hex2Rgb(string hex)
+        internal static Color Hex2Rgb(string hex)
         {
             int a, b, g, r, u;
 
@@ -163,7 +163,7 @@ namespace ChromaCs
                 r = u >> 16;
                 g = u >> 8 & 0xFF;
                 b = u & 0xFF;
-                return new RgbColor(r, g, b);
+                return new Color(r, g, b);
             }
 
             //TODO: check regex
@@ -178,7 +178,7 @@ namespace ChromaCs
                 g = u >> 16 & 0xFF;
                 b = u >> 8 & 0xFF;
                 a = Convert.ToInt32(Math.Round(Convert.ToDouble(((u & 0xFF) / 0xFF * 100) / 100)));
-                return new RgbColor(r, g, b, a);
+                return new Color(r, g, b, a);
             }
 
             //if ((_input.css != null) && (rgb = _input.css(hex)))
@@ -189,7 +189,7 @@ namespace ChromaCs
             throw new InvalidCastException("Unknown color: " + hex);
         }
 
-        public RgbColor HsiToRgb(HsiColor hsi)
+        internal static Color HsiToRgb(HsiColor hsi)
         {
 
             var PITHIRD = Math.PI / 3;
@@ -243,10 +243,10 @@ namespace ChromaCs
             g = limit(i * g * 3);
             b = limit(i * b * 3);
 
-            return new RgbColor(Convert.ToInt32(r * 255), Convert.ToInt32(g * 255), Convert.ToInt32(b * 255), hsi.Alpha);
+            return new Color(Convert.ToInt32(r * 255), Convert.ToInt32(g * 255), Convert.ToInt32(b * 255), hsi.Alpha);
         }
 
-        public RgbColor HslToRgb(HslColor hsl)
+        internal static Color HslToRgb(HslColor hsl)
         {
             double b, g, h, l, r, s;
             h = hsl.H;
@@ -294,14 +294,14 @@ namespace ChromaCs
                     }
                 }
 
-                return new RgbColor(Convert.ToInt32(c[0] * 255), Convert.ToInt32(c[1] * 255), Convert.ToInt32(c[2] * 255), hsl.Alpha);
+                return new Color(Convert.ToInt32(c[0] * 255), Convert.ToInt32(c[1] * 255), Convert.ToInt32(c[2] * 255), hsl.Alpha);
             }
 
-            return new RgbColor(Convert.ToInt32(r), Convert.ToInt32(g), Convert.ToInt32(b), hsl.Alpha);
+            return new Color(Convert.ToInt32(r), Convert.ToInt32(g), Convert.ToInt32(b), hsl.Alpha);
 
         }
 
-        public RgbColor HsvToRgb(HsvColor hsv)
+        internal static Color HsvToRgb(HsvColor hsv)
         {
             double b, f, g, h, i, p, q, r, s, t, v;
 
@@ -336,23 +336,23 @@ namespace ChromaCs
                 switch (i)
                 {
                     case 0:
-                        return new RgbColor(Convert.ToInt32(v), Convert.ToInt32(t), Convert.ToInt32(p), hsv.Alpha);
+                        return new Color(Convert.ToInt32(v), Convert.ToInt32(t), Convert.ToInt32(p), hsv.Alpha);
                     case 1:
-                        return new RgbColor(Convert.ToInt32(q), Convert.ToInt32(v), Convert.ToInt32(p), hsv.Alpha);
+                        return new Color(Convert.ToInt32(q), Convert.ToInt32(v), Convert.ToInt32(p), hsv.Alpha);
                     case 2:
-                        return new RgbColor(Convert.ToInt32(p), Convert.ToInt32(v), Convert.ToInt32(t), hsv.Alpha);
+                        return new Color(Convert.ToInt32(p), Convert.ToInt32(v), Convert.ToInt32(t), hsv.Alpha);
                     case 3:
-                        return new RgbColor(Convert.ToInt32(p), Convert.ToInt32(q), Convert.ToInt32(v), hsv.Alpha);
+                        return new Color(Convert.ToInt32(p), Convert.ToInt32(q), Convert.ToInt32(v), hsv.Alpha);
                     case 4:
-                        return new RgbColor(Convert.ToInt32(t), Convert.ToInt32(p), Convert.ToInt32(v), hsv.Alpha);
+                        return new Color(Convert.ToInt32(t), Convert.ToInt32(p), Convert.ToInt32(v), hsv.Alpha);
                     case 5:
-                        return new RgbColor(Convert.ToInt32(v), Convert.ToInt32(p), Convert.ToInt32(q), hsv.Alpha);
+                        return new Color(Convert.ToInt32(v), Convert.ToInt32(p), Convert.ToInt32(q), hsv.Alpha);
                 }
             }
-            return new RgbColor();
+            return new Color();
         }
 
-        public RgbColor LabToRgb(LabColor lab)
+        internal static Color LabToRgb(LabColor lab)
         {
 
             Func<double, double> xyz_rgb = (t) =>
@@ -386,10 +386,10 @@ namespace ChromaCs
             g = xyz_rgb(-0.9692660 * x + 1.8760108 * y + 0.0415560 * z);
             b = xyz_rgb(0.0556434 * x - 0.2040259 * y + 1.0572252 * z);
 
-            return new RgbColor(Convert.ToInt32(r), Convert.ToInt32(g), Convert.ToInt32(b), lab.Alpha);
+            return new Color(Convert.ToInt32(r), Convert.ToInt32(g), Convert.ToInt32(b), lab.Alpha);
         }
 
-        public RgbColor LchToRgb(LchColor lch)
+        internal static Color LchToRgb(LchColor lch)
         {
 
             var lab = LchToLab(lch);
@@ -397,7 +397,7 @@ namespace ChromaCs
             return rgb;
         }
 
-        public RgbColor NumToRgb(int num)
+        internal static Color NumToRgb(int num)
         {
             int b, g, r;
             if (num >= 0 && num <= 0xFFFFFF)
@@ -405,12 +405,12 @@ namespace ChromaCs
                 r = num >> 16;
                 g = (num >> 8) & 0xFF;
                 b = num & 0xFF;
-                return new RgbColor(r, g, b);
+                return new Color(r, g, b);
             }
-            return new RgbColor(0, 0, 0);
+            return new Color(0, 0, 0);
         }
 
-        public RgbColor TemperatureToRgb(double kelvin)
+        internal static Color TemperatureToRgb(double kelvin)
         {
             double r, g, b;
             var temp = kelvin / 100d;
@@ -433,12 +433,12 @@ namespace ChromaCs
                 g = 325.4494125711974 + 0.07943456536662342 * (g = temp - 50) - 28.0852963507957 * Math.Log(g);
                 b = 255;
             }
-            return new RgbColor(Convert.ToInt32(r), Convert.ToInt32(g), Convert.ToInt32(b));
+            return new Color(Convert.ToInt32(r), Convert.ToInt32(g), Convert.ToInt32(b));
         }
 
         //out
 
-        public string HslToCss(HslColor hsl)
+        internal static string HslToCss(HslColor hsl)
         {
             Func<double, string> rnd = (a) =>
             {
@@ -457,7 +457,7 @@ namespace ChromaCs
             return $"{mode}({h},{s},{l})";
         }
 
-        public CmykColor RgbToCmyk(RgbColor rgb)
+        internal static CmykColor RgbToCmyk(Color rgb)
         {
             var r = rgb.R / 255;
             var g = rgb.G / 255;
@@ -472,7 +472,7 @@ namespace ChromaCs
             return new CmykColor(c, m, y, k);
         }
 
-        public string RgbToCss(RgbColor rgb)
+        internal static string RgbToCss(Color rgb)
         {
             var mode = rgb.A < 1 ? "rgba" : "rgb";
             if (mode == "rgb")
@@ -485,7 +485,7 @@ namespace ChromaCs
             }
         }
 
-        public HcgColor RgbToHcg(RgbColor rgb)
+        internal static HcgColor RgbToHcg(Color rgb)
         {
 
             var min = (new int[] { rgb.R, rgb.G, rgb.B }).Min();
@@ -524,7 +524,7 @@ namespace ChromaCs
             return new HcgColor(h, c, _g);
         }
 
-        public string RgbToHex(RgbColor rgb)
+        internal static string RgbToHex(Color rgb)
         {
             var mode = rgb.A < 1 ? "rgba" : "rgb";
 
@@ -546,7 +546,7 @@ namespace ChromaCs
 
         }
 
-        public HsiColor RgbToHsi(RgbColor rgb)
+        internal static HsiColor RgbToHsi(Color rgb)
         {
             var TWOPI = Math.PI * 2;
             var r = rgb.R / 255;
@@ -575,7 +575,7 @@ namespace ChromaCs
             return new HsiColor(h * 360, s, i);
         }
 
-        public HslColor RgbToHsl(RgbColor rgb)
+        internal static HslColor RgbToHsl(Color rgb)
         {
 
             var r = rgb.R / 255d;
@@ -619,7 +619,7 @@ namespace ChromaCs
             return new HslColor(h, s, l);
         }
 
-        public HsvColor RgbToHsv(RgbColor rgb)
+        internal static HsvColor RgbToHsv(Color rgb)
         {
             double b, delta, g, h, r, s, v;
 
@@ -661,7 +661,7 @@ namespace ChromaCs
             return new HsvColor(h, s, v);
         }
 
-        public LabColor RgbToLab(RgbColor rgb)
+        internal static LabColor RgbToLab(Color rgb)
         {
             Func<double, double> rgb_xyz = (r) =>
             {
@@ -687,11 +687,11 @@ namespace ChromaCs
                 }
             };
 
-            Func<RgbColor, Tuple<double, double, double>> rgb2xyz = (rgbColor) =>
+            Func<Color, Tuple<double, double, double>> rgb2xyz = (Color) =>
             {
-                var r = rgb_xyz(rgbColor.R);
-                var g = rgb_xyz(rgbColor.G);
-                var b = rgb_xyz(rgbColor.B);
+                var r = rgb_xyz(Color.R);
+                var g = rgb_xyz(Color.G);
+                var b = rgb_xyz(Color.B);
                 var lx = xyz_lab((0.4124564 * r + 0.3575761 * g + 0.1804375 * b) / LabColor.LabConstants.Xn);
                 var ly = xyz_lab((0.2126729 * r + 0.7151522 * g + 0.0721750 * b) / LabColor.LabConstants.Yn);
                 var lz = xyz_lab((0.0193339 * r + 0.1191920 * g + 0.9503041 * b) / LabColor.LabConstants.Zn);
@@ -705,13 +705,13 @@ namespace ChromaCs
             return new LabColor(116 * y - 16, 500 * (x - y), 200 * (y - z));
         }
 
-        public LchColor RgbToLch(RgbColor rgb)
+        internal static LchColor RgbToLch(Color rgb)
         {
             var lab = RgbToLab(rgb);
             return LabToLch(lab);
         }
 
-        public double RgbToLuminance(RgbColor rgb)
+        internal static double RgbToLuminance(Color rgb)
         {
             Func<double, double> luminance_x = (x) =>
              {
@@ -732,12 +732,12 @@ namespace ChromaCs
             return 0.2126 * r + 0.7152 * g + 0.0722 * b;
         }
 
-        public int RgbToNum(RgbColor rgb)
+        internal static int RgbToNum(Color rgb)
         {
             return (rgb.R << 16) + (rgb.G << 8) + rgb.B;
         }
 
-        public double RgbToTemperature(RgbColor rgb)
+        internal static double RgbToTemperature(Color rgb)
         {
             double  eps,  maxTemp, minTemp, temp;
             temp = 0;
@@ -761,13 +761,13 @@ namespace ChromaCs
         }
 
         ///
-        public LabColor LchToLab(LchColor lch)
+        internal static LabColor LchToLab(LchColor lch)
         {
             var h = lch.H * (Math.PI / 180);
             return new LabColor(lch.L, Math.Cos(h) * lch.C, Math.Sin(lch.H * lch.C));
         }
 
-        public LchColor LabToLch(LabColor lab)
+        internal static LchColor LabToLch(LabColor lab)
         {
             var c = Math.Sqrt(lab.A * lab.A + lab.B * lab.B);
             var h = (Math.Atan2(lab.B, lab.A) * (180 / Math.PI) + 360) % 360;

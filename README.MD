@@ -1,4 +1,4 @@
 
 # chroma.cs
-chroma.cs is porty chroma.js from js to C#.
+chroma.cs is port [chroma.js](https://github.com/gka/chroma.js/) from js to C#.
 

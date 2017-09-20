@@ -8,13 +8,11 @@ using System.Threading.Tasks;
 namespace UnitTests
 {
     [TestFixture]
-    public class TestClass
+    public class ColorTests
     {
         [Test]
-        public void TestMethod()
+        public void Сhroma()
         {
-            // TODO: Add your test code here
-            Assert.Pass("Your first passing test");
         }
     }
 }
