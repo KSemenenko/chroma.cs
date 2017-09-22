@@ -8,11 +8,11 @@ namespace ChromaCs
     {
         public LchColor() { }
 
-        public LchColor(double l, double c, double h, int alpha = 1) //TODO: Check alpha
+        public LchColor(double lightness, double chroma, double hue, int alpha = 1) //TODO: Check alpha
         {
-            L = l;
-            C = c;
-            H = h;
+            L = lightness;
+            C = chroma;
+            H = hue;
             Alpha = alpha;
         }
 

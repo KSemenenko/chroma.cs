@@ -8,19 +8,19 @@ namespace ChromaCs
     {
         public CmykColor() { }
 
-        public CmykColor(int c, int m, int y, int k, int alpha = 1) //TODO: Check alpha
+        public CmykColor(float cyan, float magenta, float yellow, float black, int alpha = 1) //TODO: Check alpha
         {
-            C = c;
-            M = m;
-            Y = y;
-            K = k;
+            C = cyan;
+            M = magenta;
+            Y = yellow;
+            K = black;
             Alpha = alpha;
         }
 
-        public int C { get; set; }
-        public int M { get; set; }
-        public int Y { get; set; }
-        public int K { get; set; }
+        public float C { get; set; }
+        public float M { get; set; }
+        public float Y { get; set; }
+        public float K { get; set; }
         public int Alpha { get; set; }
     }
 }

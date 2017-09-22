@@ -56,25 +56,25 @@ namespace ChromaCs
             return new HsvColor(hue, saturation, value, alpha);
         }
 
-        public static LabColor Lab(int lightness, int a, int b, int alpha = 1)
+        public static LabColor Lab(double lightness, double a, double b, int alpha = 1)
         {
             return new LabColor(lightness, a, b, alpha);
         }
 
         //The range for lightness and chroma depend on the hue, but go roughly from 0..100-150. The range for hue is 0..360.
-        public static Color Lch(int lightness, int chroma, int hue)
+        public static LchColor Lch(double lightness, double chroma, double hue)
         {
-            return null;
+            return new LchColor(lightness, chroma, hue);
         }
 
-        public static Color Hcl(int hue, int chroma, int lightness)
+        public static HclColor Hcl(double hue, double chroma, double lightness)
         {
-            return null;
+            return new HclColor(hue, chroma, lightness);
         }
 
-        public static Color Cmyk(float cyan, float magenta, float yellow, float black)
+        public static CmykColor Cmyk(float cyan, float magenta, float yellow, float black)
         {
-            return null;
+            return new CmykColor(cyan, magenta, yellow, black);
         }
 
         public static Color Gl(float red, float green, float blue, float alpha = 0f)
@@ -104,16 +104,14 @@ namespace ChromaCs
 
         public static Color Random()
         {
-            //var rnd = new Random(Environment.TickCount);
-            //var digits = "0123456789abcdef";
-            //var code = "#";
-            //for (int i = 0; i <= 6; i++)
-            //{
-            //    code += digits[rnd.Next(0, 15)];
-            //}
-            //return Hex2Rgb(code);
-
-            return null;
+            var rnd = new Random(Environment.TickCount);
+            var digits = "0123456789abcdef";
+            var code = "#";
+            for (int i = 0; i <= 6; i++)
+            {
+                code += digits[rnd.Next(0, 15)];
+            }
+            return Hex2Rgb(code);
         }
 
         public static Color Contrast(Color color1, Color color2)
