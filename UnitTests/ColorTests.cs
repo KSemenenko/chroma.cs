@@ -13,8 +13,7 @@ namespace UnitTests
         [Test]
         public void Сhroma()
         {
-
-
+            throw new NotImplementedException();
         }
     }
 }

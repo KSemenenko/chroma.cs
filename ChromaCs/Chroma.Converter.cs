@@ -12,11 +12,12 @@ namespace ChromaCs
 
         internal static Color CmykToRgb(CmykColor color)
         {
+            //TODO: Fix it, int is not correct
             int alpha, b, c, g, k, m, r, y;
-            c = color.C;
-            m = color.M;
-            y = color.Y;
-            k = color.K;
+            c = (int)color.C;
+            m = (int)color.M;
+            y = (int)color.Y;
+            k = (int)color.K;
 
             //TODO: check alpha
             alpha = color.Alpha;

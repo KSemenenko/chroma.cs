@@ -50,7 +50,6 @@
   <ItemGroup>
     <Compile Include="ColorTests.cs" />
     <Compile Include="ChromaTests.cs" />
-    <Compile Include="Quickstart.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CubehelixTests.cs" />
     <Compile Include="ScaleTests.cs" />
